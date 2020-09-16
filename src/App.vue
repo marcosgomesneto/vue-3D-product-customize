@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <b-container>
+    <b-container fluid class="p-0">
       <ToolBar v-model="bottleOptions"/>
-      <Label v-model="canvasLabel" :bottleOptions="bottleOptions"/>
-      <Bottle :canvasLabel="canvasLabel"/>
-      
+      <div id="wrapEdit">
+        <Label v-model="canvasLabel" :bottleOptions="bottleOptions"/>
+        <Bottle :canvasLabel="canvasLabel" :bottleOptions="bottleOptions.bottle"/>
+      </div>
     </b-container>
   </div>
 </template>
@@ -25,17 +26,36 @@ export default {
     return{
       canvasLabel: null,
       bottleOptions: {
-        title: 'Sua marca teste aqui'
+        label: {
+          title: 'Sua marca teste aqui',
+          titleColor: '#000000',
+          subtitle: 'Suplemento alimentar de vitaminas e minerais em cápsulas',
+          subtitleColor: '#000033',
+          capsNumber: 60
+        },
+        bottle: {
+          bottleColor: '#00FFFF',
+          bottleLidColor: '#000'
+        }
       }
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '~bootstrap';
+@import '~bootstrap-vue';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+body #app{
+    font-family: 'Roboto';
+}
 body{
   margin: 0;
   padding: 0;
+}
+#wrapEdit{
+  margin-left: 300px;
 }
 #app {
 

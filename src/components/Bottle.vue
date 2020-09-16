@@ -1,5 +1,5 @@
 <template>
-    <div>          
+    <div id="bottle3d">          
         <div id="bottleCanvas" ref="bottleCanvas">
             
         </div>
@@ -15,6 +15,9 @@ export default {
     props: {
         canvasLabel: {
             required: true
+        },
+        bottleOptions: {
+            required: true
         }
     },
     data(){
@@ -22,7 +25,19 @@ export default {
             renderCalls: [],
             scene: null,
             camera: null,
-            renderer: null
+            renderer: null,
+            bottleObj: null,
+            bottleLidObj: null
+        }
+    },
+    watch: {
+        bottleOptions: {
+            handler(options){              
+                console.log(options.bottleLidColor)
+                this.bottleLidObj.children[0].material.color.setStyle(options.bottleLidColor)
+                this.bottleObj.children[0].material.color.setStyle(options.bottleLidColor)
+            },
+            deep: true
         }
     },
     methods: {
@@ -56,13 +71,12 @@ export default {
             bottle.position.set(19, 0, 0);
 
             //var obj = bottle.getObjectByName('Tube001');
-            var obj2 = bottle.getObjectByName('ChamferCyl001');
-            var obj3 = bottle.getObjectByName('Line001');            
+            this.bottleLidObj = bottle.getObjectByName('ChamferCyl001');
+            this.bottleObj = bottle.getObjectByName('Line001');            
 
             
-            obj2.children[0].material.color = new THREE.Color("#2B2300");
-
-            obj3.children[0].material.color = new THREE.Color("#010101");
+            this.bottleLidObj.children[0].material.color = new THREE.Color("#2B2300");
+            this.bottleObj.children[0].material.color = new THREE.Color("#010101");
 
             this.scene.add(bottle);
         }
@@ -108,5 +122,8 @@ export default {
 <style>
     #bottleCanvas canvas{
         outline: none;
+    }
+    #bottle3d{
+        background-image: url(../assets/nykax-logo-t2.png);
     }
 </style>
