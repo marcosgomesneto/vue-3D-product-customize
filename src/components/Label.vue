@@ -23,7 +23,8 @@ export default {
             canvas: null,
             canvasTitle: null,
             canvasCapsNumber: null,
-            canvasSubtitle: null
+            canvasSubtitle: null,
+            canvasBorder: null,
         }
     },
     watch:{
@@ -48,19 +49,24 @@ export default {
         });
         canvas.setWidth(800);
 
-        var border = new fabric.Rect({
+
+
+
+        this.canvasBorder = new fabric.Rect({
             width: 795,
             height: 245,
             left: 0,
             top: 0,
             stroke: '#6b5700',
             strokeWidth: 5,
-            fill: '#f1f1f1',
+            fill: 'transparent',
             selectable: false,
             originX: 'left',
             originY: 'top'
         });
-        canvas.add(border);
+        canvas.add(this.canvasBorder);
+
+
 
         var rect2 = new fabric.Rect({
             width: 150,
@@ -161,11 +167,52 @@ export default {
 
 
 
+
+
+        fabric.loadSVGFromURL('./assets/labels/texture05.svg', function(objects, options) {
+            objects.map( v => ( v.fill = '#00F' ) );
+            var obj = fabric.util.groupSVGElements(objects, options);
+            obj.set({
+                left: 0,
+                top: 0,
+                opacity: 0.2
+            });
+            obj.scale(1);
+            var patternSourceCanvas = new fabric.StaticCanvas();
+            patternSourceCanvas.setWidth(obj.getScaledWidth());
+            patternSourceCanvas.setHeight(obj.getScaledHeight());
+
+            patternSourceCanvas.add(obj);
+            patternSourceCanvas.renderAll();
+            
+            /* eslint-disable */
+            const pattern = new fabric.Pattern({
+                source: patternSourceCanvas.getElement(),
+                repeat: 'repeat'
+            });
+            /* eslint-enable */
+            
+            
+            let myrect = new fabric.Rect({
+                width: 800,
+                height: 250,
+                left: 0,
+                top: 0,
+                fill: pattern,
+                selectable: false
+            });
+
+            canvas.add(myrect);
+            canvas.sendToBack(myrect);
+            canvas.renderAll(); 
+        });
+
         canvas.add(this.canvasTitle);
         canvas.add(this.canvasSubtitle);
         canvas.add(infoText);
         canvas.add(this.canvasCapsNumber);
-        this.canvas = canvas
+
+        this.canvas = canvas;
 
         this.$emit('input', {
             canvas: canvas,

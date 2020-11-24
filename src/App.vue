@@ -34,8 +34,9 @@ export default {
           capsNumber: 60
         },
         bottle: {
-          bottleColor: '#00FFFF',
-          bottleLidColor: '#000'
+          bottleColor: '#797979',
+          transparent: true,
+          bottleLidColor: '#110056'
         }
       }
     }
@@ -50,6 +51,7 @@ export default {
 body #app{
     font-family: 'Roboto';
 }
+
 body{
   margin: 0;
   padding: 0;

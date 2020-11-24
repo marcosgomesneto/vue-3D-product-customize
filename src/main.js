@@ -26,4 +26,6 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
-
+window.onload = function(){
+  document.getElementById("overlay").style.display = "none";
+};

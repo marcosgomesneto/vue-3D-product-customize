@@ -6,6 +6,88 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+        #overlay{
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            background-color: #000;
+            z-index: 100;
+            
+        }
+        @keyframes bounce {
+        0% {
+            transform: translateY(0px);
+        }
+        40% {
+            transform: translateY(-20px);
+        }
+        80%,
+        100% {
+            transform: translateY(0px);
+        }
+        }
+        .nikax-logo{
+            width: 150px;
+            height: 143px;
+            background-image: url(./assets/images/nykax-logo.png);
+            position: absolute;
+            left: 50%;
+            top: calc( 50% - 120px);
+            transform: translateX(-50%);
+        }
+        .loading-text{
+            position: absolute;
+            color: #fff;
+            top: calc(50% + 50px);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .loading {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .loading__letter:nth-child(2) {
+        animation-delay: 0.1s;
+        }
+        .loading__letter:nth-child(3) {
+        animation-delay: 0.2s;
+        }
+        .loading__letter:nth-child(4) {
+        animation-delay: 0.3s;
+        }
+        .loading__letter:nth-child(5) {
+        animation-delay: 0.4s;
+        }
+        .loading__letter:nth-child(6) {
+        animation-delay: 0.5s;
+        }
+        .loading__letter:nth-child(7) {
+        animation-delay: 0.6s;
+        }
+        .loading__letter:nth-child(8) {
+        animation-delay: 0.8s;
+        }
+        .loading__letter:nth-child(9) {
+        animation-delay: 1s;
+        }
+        .loading__letter:nth-child(10) {
+        animation-delay: 1.2s;
+        }
+        .loading__letter {
+            font-size: 12px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation-name: bounce;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
   </head>
   <body>
     <noscript>
@@ -13,6 +95,25 @@
     </noscript>
     <div id="app">
     
+    </div>
+    <div id="overlay">
+      <div id="container">
+        <div class="nikax-logo"></div>
+        <div class="loading-text">
+            <div class="loading">
+              <div class="loading__letter">A</div>
+              <div class="loading__letter">G</div>
+              <div class="loading__letter">U</div>
+              <div class="loading__letter">A</div>
+              <div class="loading__letter">R</div>
+              <div class="loading__letter">D</div>
+              <div class="loading__letter">E</div>
+              <div class="loading__letter">.</div>
+              <div class="loading__letter">.</div>
+              <div class="loading__letter">.</div>
+            </div>
+        </div>
+      </div>
     </div>
     <!-- built files will be auto injected -->
   </body>
